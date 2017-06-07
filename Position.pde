@@ -25,12 +25,12 @@ class Position {
     else
       this.x += (distance*(direction-2)); // dir - 2 to make it positive or negative
   }
-  
+
   boolean at(Position other) {
     return this.x == other.x && this.y == other.y;
   }
-  
+
   Position clone() {
-    return new Position(this.x, this.y);    
+    return new Position(this.x, this.y);
   }
 }
