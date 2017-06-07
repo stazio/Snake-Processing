@@ -68,8 +68,8 @@ void newFood() {
   if (food == null)
     food = new Position();
   
-  food.x = floor((int)random(0, width)/10)*10;
-  food.y = floor((int)random(0, height)/10)*10;
+  food.x = floor((int)random(boxX, BOX_WIDTH+boxX)/10)*10;
+  food.y = floor((int)random(boxY, BOX_HEIGHT+boxY)/10)*10;
 }
 
 void onRunState() {
