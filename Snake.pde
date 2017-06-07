@@ -1,3 +1,5 @@
+final int CUBE_SIZE = 10;
+final int BOX_WIDTH = 600, BOX_HEIGHT = 400;
 
 /*
 0 - INIT
@@ -8,11 +10,6 @@
  */
 int STATE = 0;
 
-ArrayList<Position> cubes = new ArrayList();
-Position food = null;
-
-int cubeSize =10;
-
 /*
 0 - UP
  1 - RIGHT
@@ -21,15 +18,26 @@ int cubeSize =10;
  */
 int direction = 0;
 
+ArrayList<Position> cubes = new ArrayList();
+Position food = null;
+
+int boxX, boxY;
+
 void setup() {
   size(800, 600);
-  cubes.add(new Position(800/2 - 10, 600/2 - 10));
+  
+  boxX = (width-BOX_WIDTH)/2;
+  boxY = (height-BOX_HEIGHT)/2;
+  
+  cubes.add(new Position(BOX_WIDTH/2 + boxX, BOX_HEIGHT/2 + boxY));
   addToFront();
   addToFront();
   addToFront();
   addToFront();
   addToFront();
   newFood();
+  
+  
   
   STATE = 2;
   frameRate(10);
@@ -51,7 +59,7 @@ void draw() {
 
 void addToFront() {
   Position newPos = cubes.get(cubes.size()-1).clone();
-  newPos.move(direction, cubeSize);
+  newPos.move(direction, CUBE_SIZE);
   cubes.add(newPos);
   print("New X: " + newPos.x + " Y: " + newPos.y);
 }
@@ -70,13 +78,9 @@ void onRunState() {
   // Move the snake
   cubes.remove(0);
   Position pos = cubes.get(cubes.size()-1).clone();
-  pos.move(direction, cubeSize);
+  pos.move(direction, CUBE_SIZE);
   cubes.add(pos);
   print("X: " + pos.x + " Y: " + pos.y + "\n");
-  
-  // Check if out of bounds
-  if (pos.x > width || pos.x < 0 || pos.y > height || pos.y < 0)
-    STATE = 4; 
   
   // Draw the Cube
   fill(255);
@@ -85,8 +89,12 @@ void onRunState() {
     if (cubes.indexOf(cube) != cubes.size()-1 && cube.at(pos))
       STATE = 4; 
       
-    rect(cube.x, cube.y, cubeSize, cubeSize);
+    rect(cube.x, cube.y, CUBE_SIZE, CUBE_SIZE);
   }
+  
+   // Check if out of bounds
+  if (pos.x > boxX + BOX_WIDTH || pos.x < boxX || pos.y > boxY + BOX_HEIGHT || pos.y < boxY)
+    STATE = 4;
   
   // Check if colliding with food
   if (pos.at(food)) {
@@ -96,7 +104,12 @@ void onRunState() {
   
   //Food
   fill(50);
-  rect(food.x, food.y, cubeSize, cubeSize);
+  rect(food.x, food.y, CUBE_SIZE, CUBE_SIZE);
+  
+  noFill();
+  stroke(255);
+  // TODO fix this
+  rect(boxX - 10, boxY - 10, BOX_WIDTH + 30, BOX_HEIGHT + 30);
 }
 
 void gameOverState() {
