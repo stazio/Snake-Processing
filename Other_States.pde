@@ -17,6 +17,14 @@ void gameOverState() {
   text("Play Again?", width/2, height/2);
 }
 
+void gamePauseState() {
+  fill(255);
+  noStroke();
+  textAlign(CENTER, CENTER);
+  textSize(25);
+  text("Press P to continue", width/2, height/2);
+}
+
 boolean isHoverOnPlay = false;
 
 void introState() {
@@ -38,6 +46,7 @@ void introState() {
   text("Play", width/2, height/2);
 }
 
+void touchStarted(){mouseMoved();}
 void mouseMoved() {
   if (STATE == 1)
     isHoverOnPlay = 

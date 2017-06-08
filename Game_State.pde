@@ -10,6 +10,7 @@ void runState() {
     pos.move(direction, CUBE_SIZE);
     cubes.add(pos);
     print("X: " + pos.x + " Y: " + pos.y + "\n");
+    listenKey = true;
 
     // Draw the Cube
     fill(255);

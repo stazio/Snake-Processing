@@ -25,6 +25,7 @@ int boxX, boxY;
 float delta;
 
 void setup() {
+  //fullScreen();
   size(600, 400);
 
   boxX = (width-BOX_WIDTH)/2;
@@ -44,6 +45,9 @@ void draw() {
     break;
   case 2:
     runState();
+    break;
+    case 3:
+    gamePauseState();
     break;
   case 4:
     gameOverState();
@@ -66,15 +70,25 @@ void newFood() {
   food.y = floor((int)random(boxY, BOX_HEIGHT+boxY)/10)*10;
 }
 
+boolean listenKey = true;
 void keyPressed() {
-  if (STATE == 2) { // In Game
-    if (keyCode == UP && direction != 2)
-      direction = 0;
-    else if (keyCode == LEFT && direction != 3)
-      direction = 1;
-    else if (keyCode == RIGHT && direction != 1)
-      direction = 3;
-    else if (keyCode == DOWN && direction != 0)
-      direction = 2;
+  if (STATE == 2 && listenKey) { // In Game
+    if (listenKey) {
+      listenKey = false;
+      if (keyCode == UP && direction != 2)
+        direction = 0;
+      else if (keyCode == LEFT && direction != 3)
+        direction = 1;
+      else if (keyCode == RIGHT && direction != 1)
+        direction = 3;
+      else if (keyCode == DOWN && direction != 0)
+        direction = 2;
+    }
+    if (key == 'p' || key == 'P')
+      STATE = 3;
+  } else if (STATE == 3) {
+    if (key == 'p' || key == 'P') {
+      STATE = 2;
+    }
   }
 }
