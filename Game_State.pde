@@ -41,6 +41,7 @@ void runState() {
     //Food
     fill(50);
     stroke(255);
+    //image(spriteAnt, food.x, food.y, CUBE_SIZE, CUBE_SIZE);
     rect(food.x, food.y, CUBE_SIZE, CUBE_SIZE);
 
     noFill();

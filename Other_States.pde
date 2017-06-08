@@ -1,8 +1,8 @@
 void gameOverState() {
   textAlign(CENTER, CENTER);
   textSize(30);
-  fill(255);
-  text("You Loose!", width/2, height/3);
+  fill(255,0,0);
+  text("You Fucking Looser.", width/2, height/3);
 
   rectMode(CENTER);
 

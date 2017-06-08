@@ -24,13 +24,15 @@ Position food = null;
 int boxX, boxY;
 float delta;
 
+
 void setup() {
   //fullScreen();
   size(600, 400);
 
   boxX = (width-BOX_WIDTH)/2;
   boxY = (height-BOX_HEIGHT)/2;
-
+  
+  
   STATE = 1;
   mouseMoved();
 }
